@@ -1,0 +1,7 @@
+.entry-content,
+.content-area {
+
+	& > * + * {
+		margin-top: 2rem;
+	}
+}

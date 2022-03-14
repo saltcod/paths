@@ -1,0 +1,32 @@
+{
+  "private": true,
+  "scripts": {
+    "watch": "next dev -p 3002",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@types/papaparse": "^5.3.2",
+    "@types/react": "^17.0.39",
+    "classnames": "^2.3.1",
+    "csv-loader": "^3.0.3",
+    "framer-motion": "^4.1.17",
+    "next": "latest",
+    "papaparse": "^5.3.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "typescript": "^4.6.2"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.2.6",
+    "postcss": "^8.3.5",
+    "tailwindcss": "^2.2.4",
+    "postcss-import": "^12.0.1",
+    "postcss-loader": "^3.0.0",
+    "postcss-mixins": "^6.2.3",
+    "postcss-nested": "^4.2.3",
+    "postcss-object-fit-images": "^1.1.2",
+    "postcss-preset-env": "^6.7.0",
+    "prettier": "^2.1.2"
+  }
+}
