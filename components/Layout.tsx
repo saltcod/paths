@@ -19,7 +19,7 @@ const Layout: FC = ( { children } ) => {
 				</Link>
 			</header>
 
-			<main className="container flex gap-12 mx-auto mt-12 font-serif">
+			<main className="container flex gap-12 mx-auto mt-12">
 				<div className="w-full">{children}</div>
 			</main>
 			<Footer />
