@@ -1,43 +1,50 @@
-import { useUser, Auth } from '@supabase/supabase-auth-helpers/react'
-import { supabaseClient } from '@supabase/supabase-auth-helpers/nextjs'
-import { useEffect, useState } from 'react'
-
-const LoginPage = () => {
-	const { user, error } = useUser()
-	const [data, setData] = useState( {} )
-
-	useEffect( () => {
-		async function loadData() {
-			const { data } = await supabaseClient.from( 'test' ).select( '*' )
-			setData( data )
-		}
-		// Only run query once user is logged in.
-		if ( user ) loadData()
-	}, [user] )
-
-	if ( !user )
-		return (
-			<>
-				{error && <p>{error.message}</p>}
-				<Auth
-					view="update_password"
-					supabaseClient={supabaseClient}
-					providers={[]}
-					socialLayout="horizontal"
-					socialButtonSize="xlarge"
-				/>
-			</>
-		)
+import Head from "next/head";
+import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
+import Link from "next/link";
+import { IPath } from "../types";
+import Image from "next/image";
+interface Props {
+	allPaths: IPath[]
+}
+export default function Home( { allPaths }: Props ) {
+	console.log( allPaths[0].pathdata[0].url.slice( -11 ) );
+	< Head >
+		<title>The Nostalgia Project</title>
+	</Head >;
 
 	return (
 		<>
-			<button onClick={() => supabaseClient.auth.signOut()}>Sign out</button>
-			<p>user:</p>
-			<pre>{JSON.stringify( user, null, 2 )}</pre>
-			<p>client-side data fetching with RLS</p>
-			<pre>{JSON.stringify( data, null, 2 )}</pre>
+			{allPaths.map( ( path ) => (
+				<div key={path.id}>
+					<Link href={`/path/${path.id}`}>
+						<a className="inline-block">
+							<div className="aspect-[4/3]">
+								{path.pathdata[0].url ?
+									<Image
+										src={`https://img.youtube.com/vi/${path?.pathdata[0].url.slice( -11 )}/hqdefault.jpg`}
+										alt="Companies"
+										width={480}
+										height={360}
+									/> : <div>box</div>}
+							</div>
+							<h2>{path.title}</h2>
+						</a>
+					</Link>
+				</div>
+
+			) )}
 		</>
-	)
+	);
 }
 
-export default LoginPage
+Home;
+
+export async function getServerSideProps() {
+	let { data } = await supabaseClient.from( "paths" ).select( "*" ).limit( 50 );
+
+	return {
+		props: {
+			allPaths: data,
+		},
+	};
+}

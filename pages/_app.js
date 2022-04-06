@@ -1,20 +1,16 @@
 import "../css/index.css";
-import "tailwindcss/tailwind.css";
-import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
 import { UserProvider } from "@supabase/supabase-auth-helpers/react";
-
+import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
 import Layout from "../components/Layout";
 
-function MyApp({ Component, pageProps }) {
+export default function MyApp({ Component, pageProps }) {
 	return (
-		<UserProvider supabaseClient={supabaseClient}>
-			<div className="container mx-auto">
+		<main className={"dark"}>
+			<UserProvider supabaseClient={supabaseClient}>
 				<Layout>
 					<Component {...pageProps} />
 				</Layout>
-			</div>
-		</UserProvider>
+			</UserProvider>
+		</main>
 	);
 }
-
-export default MyApp;
