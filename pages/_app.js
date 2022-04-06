@@ -1,19 +1,19 @@
 import "../css/index.css";
 import "tailwindcss/tailwind.css";
-import { createContext, useState, useMemo } from "react";
+import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
+import { UserProvider } from "@supabase/supabase-auth-helpers/react";
 
-export const ThemeContext = createContext();
+import Layout from "../components/Layout";
 
 function MyApp({ Component, pageProps }) {
-	const [theme, setTheme] = useState("light");
-	const contextValue = useMemo(() => ({ theme, setTheme }), [theme]);
-
 	return (
-		<div className="site-wrapper">
-			<ThemeContext.Provider value={contextValue}>
-				<Component {...pageProps} />
-			</ThemeContext.Provider>
-		</div>
+		<UserProvider supabaseClient={supabaseClient}>
+			<div className="container mx-auto">
+				<Layout>
+					<Component {...pageProps} />
+				</Layout>
+			</div>
+		</UserProvider>
 	);
 }
 
