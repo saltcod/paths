@@ -4,12 +4,18 @@ module.exports = {
 		"./components/**/*.{js,ts,jsx,tsx}",
 	],
 	darkMode: false, // or 'media' or 'class'
-	theme: {
-		extend: {},
-	},
+
 	variants: {
 		extend: {},
 	},
 	plugins: [],
-	theme: {},
+	theme: {
+		extend: {
+			fontSize: {
+				"8xl": "8rem",
+				"9xl": "9rem",
+				"10xl": "10rem",
+			},
+		},
+	},
 };

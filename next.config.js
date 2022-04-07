@@ -1,6 +1,6 @@
 module.exports = {
 	images: {
-		domains: ["assets.vercel.com", "img.youtube.com"],
+		domains: ["assets.vercel.com", "img.youtube.com", "gravatar.com"],
 		formats: ["image/avif", "image/webp"],
 	},
 	webpack: (config, options) => {

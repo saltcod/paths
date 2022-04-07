@@ -5,7 +5,7 @@ import Layout from "../components/Layout";
 
 export default function MyApp({ Component, pageProps }) {
 	return (
-		<main className={"dark"}>
+		<main className="">
 			<UserProvider supabaseClient={supabaseClient}>
 				<Layout>
 					<Component {...pageProps} />

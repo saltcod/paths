@@ -4,5 +4,11 @@ export interface IPath {
 	title: string
 	description: string
 	views: number
-	pathdata?: {}
+	pathdata: {}
+	gravatar_hash: string
+}
+
+export interface IPathData {
+	url: string
+	description: string
 }
