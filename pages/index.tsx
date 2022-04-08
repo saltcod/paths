@@ -6,7 +6,7 @@ export default function Home() {
 
 	<Head>
 		<title>Paths</title>
-	</Head >;
+	</Head >
 
 	return (
 		<>

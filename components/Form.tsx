@@ -49,7 +49,7 @@ export default function Form( { path }: any ) {
 	function deleteItem( url: string ) {
 
 		// remove the associated item from state
-		setPaths( paths.filter( path => path.url !== url ) )
+		setPaths( paths.filter( ( path: any ) => path.url !== url ) )
 	}
 
 	function handleChange( e: any ) {
@@ -124,7 +124,7 @@ export default function Form( { path }: any ) {
 			</label>
 
 
-			{paths.map( ( path, i ) => (
+			{paths.map( ( path: any, i: number ) => (
 				<div key={`path-${i}`} >
 					<div className="flex gap-8 pt-8 mt-8 mb-24 rounded-md bg-gray-50 path-item">
 						<div className="relative grid gap-8">
