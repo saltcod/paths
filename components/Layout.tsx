@@ -8,7 +8,7 @@ const Layout: FC = ( { children } ) => {
 	return (
 		<>
 			<Head>
-				<title>The Nostalgia Project</title>
+				<title>Paths</title>
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 

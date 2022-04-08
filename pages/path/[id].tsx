@@ -124,10 +124,10 @@ export default function SinglePath( { path }: PathProp ) {
 					</Link>
 				</div>
 			</div>
-			<p className='max-w-2xl mt-4'>{description}</p>
+			<p className='max-w-2xl mt-4 text-xl'>{description}</p>
 			{/* @ts-ignore */}
 			{pathdata.map( ( path: any, i: number ) => (
-				<div key={`${path.url}-${i}`} className="grid grid-cols-2 gap-8 mt-24">
+				<div key={`${path.url}-${i}`} className="grid grid-cols-2 gap-8 pb-24 mt-24 border-b">
 					<div><div className='sticky top-4'>{path.description}</div></div>
 					<div>{path.url ? <YoutubeEmbed url={path.url} /> : null}</div>
 				</div>

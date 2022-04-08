@@ -76,7 +76,6 @@ export default function Form( { path }: any ) {
 	}
 
 	async function deletePath() {
-		console.log( 'hello' )
 		try {
 			const { data, error } = await supabaseClient
 				.from( 'paths' )
@@ -93,11 +92,10 @@ export default function Form( { path }: any ) {
 		}
 	}
 
-
 	const { user } = useUser();
 	const router = useRouter();
 	const [loading, setLoading] = useState( false )
-	const [paths, setPaths] = useState( samplePaths )
+	const [paths, setPaths] = useState( path ? path.pathdata : samplePaths )
 	const [pathTitle, setPathTitle] = useState( path?.title || '' )
 	const [pathDescription, setPathDescription] = useState( path?.description || '' )
 
@@ -120,15 +118,15 @@ export default function Form( { path }: any ) {
 					required
 					className='max-w-xl p-4 border'
 					cols={62}
-					rows={4}
+					rows={5}
 					value={pathDescription}
 					onChange={( e ) => setPathDescription( e.target.value )} />
 			</label>
 
 
 			{paths.map( ( path, i ) => (
-				<>
-					<div key={`path-${i}`} className="flex gap-8 pt-8 mt-8 mb-24 rounded-md bg-gray-50 path-item">
+				<div key={`path-${i}`} >
+					<div className="flex gap-8 pt-8 mt-8 mb-24 rounded-md bg-gray-50 path-item">
 						<div className="relative grid gap-8">
 							<label className="grid gap-1 mt-12">
 								<p className="font-bold uppercase">URL:</p>
@@ -164,7 +162,7 @@ export default function Form( { path }: any ) {
 
 					</div>
 					<hr />
-				</>
+				</div>
 			) )}
 
 			<div className='mt-12'>

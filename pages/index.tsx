@@ -5,7 +5,7 @@ import Link from 'next/link'
 export default function Home() {
 
 	<Head>
-		<title>The Nostalgia Project</title>
+		<title>Paths</title>
 	</Head >;
 
 	return (

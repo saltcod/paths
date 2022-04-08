@@ -11,7 +11,7 @@ interface Props {
 export default function Explore( { allPaths }: Props ) {
 	console.log( allPaths[0] );
 	<Head>
-		<title>The Nostalgia Project</title>
+		<title>Paths</title>
 	</Head >;
 
 	return (
