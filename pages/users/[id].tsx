@@ -16,7 +16,7 @@ export default function SinglePath( { paths }: PathProp ) {
 
 	return (
 		<>
-			<div className="w-24 h-24 overflow-hidden border border-4 rounded-full rounded-br-none">
+			<div className="w-24 h-24 overflow-hidden border border-4 rounded-full hover:border-cyan-200">
 				<Image
 					src={`https://gravatar.com/avatar/${gravatar_hash}`}
 					alt="Gravatar"

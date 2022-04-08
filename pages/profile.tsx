@@ -1,7 +1,7 @@
 // pages/profile.js
 import { withAuthRequired } from '@supabase/supabase-auth-helpers/nextjs'
 
-export default function Profile( { user } ) {
+export default function Profile( { user }: any ) {
 	return (
 		<>
 		  <div>Hello {user.email}</div>

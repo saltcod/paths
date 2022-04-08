@@ -67,7 +67,7 @@ export default function Home() {
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				viewBox="0 0 1551 38"
-				className="w-full my-12 md:my-48"
+				className="w-full my-12 md:mt-36 md:mb-24"
 			>
 				<path
 					d="M4 19.978h0c30.608 8.542 61.213 17.086 91.987 12.807 30.773-5.279 61.715-24.378 93.47-26.566C221.21 2.03 253.78 16.754 284.41 23.899c30.63 7.144 59.319 6.412 89.019.983 29.7-5.728 60.411-16.751 91.986-13.775 31.575 2.977 64.017 19.952 94.954 21.647 30.937 1.695 60.343-11.89 90.533-15.743 30.13-3.853 60.956 2.025 91.987 7.871 31.03 5.847 62.266 11.662 93.47 6.888 31.204-4.774 64.377-20.138 93.47-20.663 31.093-.524 62.107 13.79 93.47 19.68 31.363 5.89 62.073 3.354 93.47-4.92 30.397-8.276 59.48-22.293 90.503-20.664 31.023 1.63 63.99 18.907 94.954 20.663 30.964 1.57 59.926-12.008 90.503-15.43 30.577-3.735 62.764 2.56 154.3 8.856"
@@ -79,7 +79,7 @@ export default function Home() {
 				/>
 			</svg>
 
-			<section className="mt-12 md:mt-24">
+			<section className="mt-12 md:mt-16">
 				<div className="grid gap-4">
 					<h2 className="mt-8 text-7xl">Start exploring</h2>
 					<p className="text-2xl">Come explore some of the paths that others are on. </p> <p>When you're done, create one of your own.</p>

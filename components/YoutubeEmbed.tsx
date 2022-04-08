@@ -10,9 +10,9 @@ export default function YoutubeEmbed( { url }: Props ) {
 	return (
 		<div>
 			<iframe
-				width="853"
-				height="480"
-				src={`https://www.youtube.com/embed/${3}`}
+				width="624"
+				height="350"
+				src={`https://www.youtube-nocookie.com/embed/${embedId}`}
 				frameBorder="0"
 				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 				allowFullScreen

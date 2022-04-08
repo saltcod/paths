@@ -5,14 +5,98 @@ import { IPath } from '../../types'
 import YoutubeEmbed from '../../components/YoutubeEmbed';
 import Image from "next/image";
 import { useUser, Auth } from "@supabase/supabase-auth-helpers/react";
+import { IconEye, IconHeart } from '@supabase/ui';
+import { useEffect, useState } from 'react';
+import { useReward } from 'react-rewards';
+
+
 
 interface PathProp {
 	path: IPath
 }
 
+async function getLikes( id: number ) {
+	try {
+		let { data, error } = await supabaseClient
+			.from( "paths" )
+			.select( "likes" )
+			.eq( 'id', id )
+			.single()
+
+		return data.likes;
+
+	} catch ( error ) {
+		console.warn( error )
+	}
+}
+
+async function incrementPageViewCount( id: number, viewCount: number ) {
+	const { data } = await supabaseClient
+		.from( 'paths' )
+		.upsert( { id: id, views: viewCount + 1 } )
+}
+
+async function incrementPageViews( id: number ) {
+	try {
+		let { data, error } = await supabaseClient
+			.from( "paths" )
+			.select( "views" )
+			.eq( 'id', id )
+			.single()
+
+
+		if ( data ) {
+			incrementPageViewCount( id, data.views )
+		}
+
+	} catch ( error ) {
+		console.warn( error )
+	}
+}
+
 export default function SinglePath( { path }: PathProp ) {
+	const { id, title, description, pathdata, views, gravatar_hash, likes } = path;
+
+	const { reward, isAnimating } = useReward( 'rewardId', 'confetti' );
+
+	useEffect( () => {
+		incrementPageViews( id );
+	}, [] )
+
+
+	const [likeCount, setLikeCount] = useState( likes );
+
+	// only allow one Like press per instance
+	const [liked, setLiked] = useState( false );
+
 	const { user } = useUser();
-	const { title, description, pathdata, views, gravatar_hash } = path;
+
+
+	// Increment likes by grabbing the current value + 1
+	async function incrementLikes( id: number ) {
+		let likes = await getLikes( id );
+		setLiked( true );
+		reward();
+
+
+		try {
+			const { data } = await supabaseClient
+				.from( 'paths' )
+				.upsert( { id: id, likes: likes + 1 } )
+
+		} catch ( error ) {
+			console.warn( error )
+		}
+	}
+
+	// Subscribe to changes to likes, update when it changes
+	const updateLikes = supabaseClient
+		.from( 'paths' )
+		.on( '*', payload => {
+			setLikeCount( payload.new.likes )
+		} )
+		.subscribe()
+
 
 	return (
 		<div>
@@ -27,7 +111,7 @@ export default function SinglePath( { path }: PathProp ) {
 						</Link>
 					)}
 				</div>
-				<div className="w-16 h-16 overflow-hidden border-4 rounded-full rounded-br-none">
+				<div className="w-16 h-16 overflow-hidden transition-colors border-4 rounded-full hover:border-cyan-200">
 					<Link href={`/users/${path.author}`}>
 						<a>
 							<Image
@@ -41,6 +125,7 @@ export default function SinglePath( { path }: PathProp ) {
 				</div>
 			</div>
 			<p className='max-w-2xl mt-4'>{description}</p>
+			{/* @ts-ignore */}
 			{pathdata.map( ( path: any, i: number ) => (
 				<div key={`${path.url}-${i}`} className="grid grid-cols-2 gap-8 mt-24">
 					<div><div className='sticky top-4'>{path.description}</div></div>
@@ -48,7 +133,15 @@ export default function SinglePath( { path }: PathProp ) {
 				</div>
 			) )}
 
-			<p>Views:{views}</p>
+			<div className='flex items-center gap-2 mt-12'>
+				<span className='flex items-center gap-2 text-xs uppercase'><IconEye />{views}</span>
+				<button
+					onClick={() => incrementLikes( path.id )}
+					type="button"
+					id="rewardId"
+					disabled={liked}
+					className={`hover:bg-gray-200 p-2 rounded-md flex items-center gap-2 text-xs uppercase ${liked ? 'cursor-not-allowed' : ''}`}><IconHeart />{likeCount}</button>
+			</div>
 
 
 		</div>

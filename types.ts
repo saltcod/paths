@@ -6,6 +6,7 @@ export interface IPath {
 	views: number
 	pathdata: {}
 	gravatar_hash: string
+	likes: number
 }
 
 export interface IPathData {

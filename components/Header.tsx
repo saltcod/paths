@@ -1,8 +1,10 @@
-
+import { useUser, Auth } from "@supabase/supabase-auth-helpers/react";
+import { IconPlus } from "@supabase/ui";
 import Link from 'next/link'
 import { useRouter } from "next/router";
 
 export default function Header() {
+	const { user, error } = useUser();
 	const router = useRouter();
 
 	return (
@@ -24,17 +26,25 @@ export default function Header() {
 							</a>
 						</Link> ) : ( null )
 					}
+
+					{user ? ( <Link href="/path/new">
+						<a className="flex items-center gap-1 text-xs font-bold hover:underline">
+							<IconPlus size={16} /> Add a path
+						</a>
+					</Link> ) : ( <Link href="/login">
+						<a className="flex items-center gap-1 text-xs font-bold hover:underline">
+							Signin
+						</a>
+					</Link> )}
+
 					{
 						router.pathname === '/' ? ( <Link href="/explore">
 							<a className="text-xs font-bold hover:underline">
 								Start Exploring →
 							</a>
-						</Link> ) : ( <Link href="/path/new">
-							<a className="text-xs font-bold hover:underline">
-								+ Add a path
-							</a>
-						</Link> )
+						</Link> ) : ( null )
 					}
+
 				</nav>
 			</header >
 		</div>

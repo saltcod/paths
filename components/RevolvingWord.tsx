@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-const paths = ['cycling', 'reading', 'music', 'driving', 'walking', 'painting', 'swimming', 'knitting', 'rowing', 'coding', 'skating', 'singing', 'Scrabble', 'puzzles']
+const paths = ['cycling', 'reading', 'music', 'driving', 'walking', 'painting', 'swimming', 'knitting', 'rowing', 'coding', 'skating', 'singing', 'Scrabble', 'puzzles', 'fishing']
 
 export default function RevolvingWord() {
 	const [word, setWord] = useState( 'running' )
