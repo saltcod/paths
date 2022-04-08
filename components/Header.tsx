@@ -33,7 +33,7 @@ export default function Header() {
 						</a>
 					</Link> ) : ( <Link href="/login">
 						<a className="flex items-center gap-1 text-xs font-bold hover:underline">
-							Signin
+								Sign-in
 						</a>
 					</Link> )}
 
