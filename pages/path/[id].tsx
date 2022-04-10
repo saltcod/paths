@@ -80,9 +80,12 @@ export default function SinglePath( { path }: PathProp ) {
 
 
 		try {
-			const { data } = await supabaseClient
+			const { data, error } = await supabaseClient
 				.from( 'paths' )
 				.upsert( { id: id, likes: likes + 1 } )
+			if ( error ) {
+				console.warn( error )
+			}
 
 		} catch ( error ) {
 			console.warn( error )
@@ -127,7 +130,7 @@ export default function SinglePath( { path }: PathProp ) {
 			<p className='max-w-2xl mt-4 text-xl'>{description}</p>
 			{/* @ts-ignore */}
 			{pathdata.map( ( path: any, i: number ) => (
-				<div key={`${path.url}-${i}`} className="grid grid-cols-2 gap-8 pb-24 mt-24 border-b">
+				<div key={`${path.url}-${i}`} className="grid grid-cols-2 gap-24 pb-24 mt-24 border-b">
 					<div><div className='sticky top-4'>{path.description}</div></div>
 					<div>{path.url ? <YoutubeEmbed url={path.url} /> : null}</div>
 				</div>
@@ -139,11 +142,9 @@ export default function SinglePath( { path }: PathProp ) {
 					onClick={() => incrementLikes( path.id )}
 					type="button"
 					id="rewardId"
-					disabled={liked}
+					disabled={liked || !user}
 					className={`hover:bg-gray-200 p-2 rounded-md flex items-center gap-2 text-xs uppercase ${liked ? 'cursor-not-allowed' : ''}`}><IconHeart />{likeCount}</button>
 			</div>
-
-
 		</div>
 	)
 }

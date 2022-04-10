@@ -8,6 +8,7 @@ import { useUser } from "@supabase/supabase-auth-helpers/react";
 
 import { useRouter } from "next/router";
 import md5 from 'md5';
+import { IPath, IPathData } from '../types';
 
 const samplePaths = [
 	{
@@ -17,13 +18,18 @@ const samplePaths = [
 ]
 
 
-export default function Form( { path }: any ) {
+interface Props {
+	path: IPath
+}
 
+export default function Form( { path }: Props ) {
+	console.log( path )
 	async function handleSubmit( e: any ) {
 		e.preventDefault();
 		setLoading( true );
 
 		const updates = {
+			...( path ? { b: path.id } : '' ),
 			author: user!.id,
 			title: pathTitle,
 			description: pathDescription,
@@ -53,6 +59,7 @@ export default function Form( { path }: any ) {
 	}
 
 	function handleChange( e: any ) {
+		console.log( 'hai' )
 		let formState: any = [];
 		const form = e.target.closest( 'form' )
 
@@ -66,6 +73,7 @@ export default function Form( { path }: any ) {
 			const description = item.querySelector( 'textarea' ).value
 			const obj = { url, description }
 			formState = [...formState, obj]
+			console.log( formState )
 			setPaths( formState );
 		} )
 	}
@@ -95,7 +103,7 @@ export default function Form( { path }: any ) {
 	const { user } = useUser();
 	const router = useRouter();
 	const [loading, setLoading] = useState( false )
-	const [paths, setPaths] = useState( path ? path.pathdata : samplePaths )
+	const [paths, setPaths] = useState<IPathData[] | any>( path ? path.pathdata : samplePaths )
 	const [pathTitle, setPathTitle] = useState( path?.title || '' )
 	const [pathDescription, setPathDescription] = useState( path?.description || '' )
 
@@ -124,7 +132,7 @@ export default function Form( { path }: any ) {
 			</label>
 
 
-			{paths.map( ( path: any, i: number ) => (
+			{paths?.map( ( path: any, i: number ) => (
 				<div key={`path-${i}`} >
 					<div className="flex gap-8 pt-8 mt-8 mb-24 rounded-md bg-gray-50 path-item">
 						<div className="relative grid gap-8">

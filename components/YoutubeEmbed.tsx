@@ -8,8 +8,9 @@ export default function YoutubeEmbed( { url }: Props ) {
 
 
 	return (
-		<div>
+		<div className="relative w-full overflow-hidden aspect-video">
 			<iframe
+				className="absolute top-0 left-0 w-full"
 				width="624"
 				height="350"
 				src={`https://www.youtube-nocookie.com/embed/${embedId}`}

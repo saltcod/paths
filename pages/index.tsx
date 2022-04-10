@@ -11,7 +11,7 @@ export default function Home() {
 	return (
 		<>
 			<section className="items-end grid-cols-2 gap-16 md:h-[65vh] md:grid">
-				<h1 className="text-2xl font-bold leading-none md:text-8xl">Welcome</h1>
+				<h1 className="text-2xl font-bold leading-none md:text-7xl xl:text-8xl">Welcome</h1>
 				<div className="grid mt-8 md:mt-0">
 					<p className="text-xl md:text-7xl">
 						Where did you get started with your love of&nbsp;<RevolvingWord />?
