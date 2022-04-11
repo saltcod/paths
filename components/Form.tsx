@@ -25,11 +25,12 @@ interface Props {
 export default function Form( { path }: Props ) {
 	console.log( path )
 	async function handleSubmit( e: any ) {
+		console.log( path );
 		e.preventDefault();
 		setLoading( true );
 
 		const updates = {
-			...( path ? { b: path.id } : '' ),
+			...( path ? { id: path.id } : '' ),
 			author: user!.id,
 			title: pathTitle,
 			description: pathDescription,
@@ -40,7 +41,7 @@ export default function Form( { path }: Props ) {
 		try {
 			const { data, error } = await supabaseClient
 				.from( 'paths' )
-				.insert( [updates], { upsert: true } )
+				.upsert( updates )
 
 			if ( error ) {
 				console.warn( error );
@@ -89,6 +90,7 @@ export default function Form( { path }: Props ) {
 				.from( 'paths' )
 				.delete()
 				.match( { id: path.id } )
+
 			if ( error ) {
 				console.warn( error )
 			}

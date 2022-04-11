@@ -8,7 +8,7 @@ export default function YoutubeEmbed( { url }: Props ) {
 
 
 	return (
-		<div className="relative w-full overflow-hidden aspect-video">
+		<div className="relative w-full overflow-hidden aspect-[4/3]">
 			<iframe
 				className="absolute top-0 left-0 w-full"
 				width="624"

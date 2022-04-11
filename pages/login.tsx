@@ -1,21 +1,16 @@
 import { useUser, Auth } from "@supabase/supabase-auth-helpers/react";
 import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
 import { useEffect, useState } from "react";
+import { useRouter } from 'next/router';
 
 const LoginPage = () => {
 	const { user, error } = useUser();
 	const [paths, setPaths] = useState( {} );
+	const router = useRouter();
 
 	useEffect( () => {
-		async function loadPaths() {
-			const { data } = await supabaseClient.from( "paths" ).select( "*" );
-			// @ts-ignore
-			setPaths( data );
-		}
-
-		// Only run query once user is logged in.
 		if ( user ) {
-			loadPaths();
+			router.push( `/explore` );
 		}
 	}, [user] );
 
@@ -28,6 +23,7 @@ const LoginPage = () => {
 				<Auth supabaseClient={supabaseClient} />
 			</div>
 		);
+
 
 	return (
 		<div className="container max-w-3xl mx-auto">
