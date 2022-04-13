@@ -4,7 +4,7 @@ import Link from "next/link";
 import { IPath } from '../../types'
 import YoutubeEmbed from '../../components/YoutubeEmbed';
 import Image from "next/image";
-import { useUser, Auth } from "@supabase/supabase-auth-helpers/react";
+import { useUser } from "@supabase/supabase-auth-helpers/react";
 import { IconEye, IconHeart } from '@supabase/ui';
 import { useEffect, useState } from 'react';
 import { useReward } from 'react-rewards';
@@ -16,6 +16,7 @@ interface PathProp {
 }
 
 async function getLikes( id: number ) {
+
 	try {
 		let { data, error } = await supabaseClient
 			.from( "paths" )
@@ -45,6 +46,9 @@ async function incrementPageViews( id: number ) {
 			.single()
 
 
+		if (error) {
+			console.warn(error)
+		}
 		if ( data ) {
 			incrementPageViewCount( id, data.views )
 		}

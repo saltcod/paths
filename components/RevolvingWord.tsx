@@ -9,7 +9,7 @@ export default function RevolvingWord() {
 		const interval = setInterval( () => {
 			const item = paths[Math.floor( Math.random() * paths.length )];
 			setWord( item );
-		}, 3000 );
+		}, 1500 );
 
 		return () => clearInterval( interval );
 	}, [] )

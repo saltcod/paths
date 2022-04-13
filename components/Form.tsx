@@ -19,7 +19,7 @@ const samplePaths = [
 
 
 interface Props {
-	path: IPath
+	path?: IPath
 }
 
 export default function Form( { path }: Props ) {
@@ -89,7 +89,7 @@ export default function Form( { path }: Props ) {
 			const { data, error } = await supabaseClient
 				.from( 'paths' )
 				.delete()
-				.match( { id: path.id } )
+				.match( { id: path?.id } )
 
 			if ( error ) {
 				console.warn( error )
